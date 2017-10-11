@@ -5,6 +5,13 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01-MathReview", "01-MathReview\01-MathReview.vcxproj", "{9C7E0F11-2349-4622-88B1-06ED24813B78}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MathLib", "MathLib\MathLib.vcxproj", "{30FD8F48-297D-4CB9-93DD-EB18E7260959}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "X-TestSpace", "X-TestSpace\X-TestSpace.vcxproj", "{D8001EA0-F39E-48C4-98BA-0C46FB9221DD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{30FD8F48-297D-4CB9-93DD-EB18E7260959} = {30FD8F48-297D-4CB9-93DD-EB18E7260959}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +28,22 @@ Global
 		{9C7E0F11-2349-4622-88B1-06ED24813B78}.Release|x64.Build.0 = Release|x64
 		{9C7E0F11-2349-4622-88B1-06ED24813B78}.Release|x86.ActiveCfg = Release|Win32
 		{9C7E0F11-2349-4622-88B1-06ED24813B78}.Release|x86.Build.0 = Release|Win32
+		{30FD8F48-297D-4CB9-93DD-EB18E7260959}.Debug|x64.ActiveCfg = Debug|x64
+		{30FD8F48-297D-4CB9-93DD-EB18E7260959}.Debug|x64.Build.0 = Debug|x64
+		{30FD8F48-297D-4CB9-93DD-EB18E7260959}.Debug|x86.ActiveCfg = Debug|Win32
+		{30FD8F48-297D-4CB9-93DD-EB18E7260959}.Debug|x86.Build.0 = Debug|Win32
+		{30FD8F48-297D-4CB9-93DD-EB18E7260959}.Release|x64.ActiveCfg = Release|x64
+		{30FD8F48-297D-4CB9-93DD-EB18E7260959}.Release|x64.Build.0 = Release|x64
+		{30FD8F48-297D-4CB9-93DD-EB18E7260959}.Release|x86.ActiveCfg = Release|Win32
+		{30FD8F48-297D-4CB9-93DD-EB18E7260959}.Release|x86.Build.0 = Release|Win32
+		{D8001EA0-F39E-48C4-98BA-0C46FB9221DD}.Debug|x64.ActiveCfg = Debug|x64
+		{D8001EA0-F39E-48C4-98BA-0C46FB9221DD}.Debug|x64.Build.0 = Debug|x64
+		{D8001EA0-F39E-48C4-98BA-0C46FB9221DD}.Debug|x86.ActiveCfg = Debug|Win32
+		{D8001EA0-F39E-48C4-98BA-0C46FB9221DD}.Debug|x86.Build.0 = Debug|Win32
+		{D8001EA0-F39E-48C4-98BA-0C46FB9221DD}.Release|x64.ActiveCfg = Release|x64
+		{D8001EA0-F39E-48C4-98BA-0C46FB9221DD}.Release|x64.Build.0 = Release|x64
+		{D8001EA0-F39E-48C4-98BA-0C46FB9221DD}.Release|x86.ActiveCfg = Release|Win32
+		{D8001EA0-F39E-48C4-98BA-0C46FB9221DD}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
