@@ -155,7 +155,7 @@ vec3 nrmRef(vec3 & lhs)
 	return lhs;
 }
 
-vec3 clmp(const vec3 & lhs, const vec3 min, const vec3 max)
+vec3 clmp(const vec3 & lhs, const vec3 & min, const vec3 & max)
 {
 	vec3 result = lhs;
 
