@@ -13,8 +13,6 @@ float & vec2::operator[](unsigned idx)
 	return v[idx];
 }
 
-
-
 vec2 operator+(const vec2 & lhs, const vec2 & rhs)
 {
 	// vec2 + vec2
@@ -103,7 +101,7 @@ float sqr(float x)
 
 float dot(const vec2 &lhs, const vec2 & rhs)
 {
-	return lhs.x * rhs.x+ lhs.y * rhs.y;
+	return lhs.x * rhs.x + lhs.y * rhs.y;
 }
 
 float dist(const vec2 & a, const vec2 & b)
