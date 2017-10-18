@@ -7,11 +7,25 @@ Transform::Transform()
 	pos = vec2{ 0,0 };
 	dim = vec2{ 0,0 };
 	angle = 0;
+	e_parent = nullptr;
 }
 
 mat3 Transform::getLocalTransform() const
 {
-	return scale(dim) * rotate(angle) * translate(pos);
+	return translate(pos) * scale(dim) * rotate (angle);
+}
+
+mat3 Transform::getGlobalTransform() const
+{
+	if (e_parent != nullptr)
+	{
+		return e_parent->getGlobalTransform() * getLocalTransform();
+	}
+	else
+	{
+		return getLocalTransform();
+	}
+	
 }
 
 void DrawMatrix(const mat3 & t, float drawing_scale)
