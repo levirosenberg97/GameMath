@@ -59,3 +59,5 @@ vec3 nrm(vec3 lhs);
 vec3 nrmRef(vec3 & lhs);
 
 vec3 clmp(const vec3 &lhs, const vec3 & min, const vec3 & max);
+
+vec3 cross(const vec3 &a, const vec3 &b);
