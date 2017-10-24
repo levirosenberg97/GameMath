@@ -48,7 +48,7 @@ int main()
 	{
 		float t = sfw::getTime();
 
-		myTransform.angle += sfw::getDeltaTime() + 900;
+		myTransform.angle += sfw::getDeltaTime() + 90;
 		myTransform.dim = vec2{ sinf(t) + 2, sinf(t) + 2 };
 		DrawMatrix(myTransform.getLocalTransform(), 40);
 
