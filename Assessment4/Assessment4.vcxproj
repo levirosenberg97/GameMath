@@ -116,8 +116,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Baby.cpp" />
+    <ClCompile Include="DemoSpawner.cpp" />
     <ClCompile Include="Emitter.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Hive.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Particles.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -126,8 +128,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Baby.h" />
+    <ClInclude Include="DemoSpawner.h" />
     <ClInclude Include="Emitter.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Hive.h" />
     <ClInclude Include="Particles.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Spawner.h" />

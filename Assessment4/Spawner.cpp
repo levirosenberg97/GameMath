@@ -4,6 +4,7 @@
 #include <time.h>
 #include<iostream>
 #include"Player.h"
+#include"Baby.h"
 
 Spawner::Spawner()
 {
@@ -15,19 +16,19 @@ Spawner::Spawner()
 	spawnAcc = 3;
 }
 
-void Spawner::draw(Transform myTran)
+void Spawner::draw(Transform myTran, Babys &bby, Babys &bby2, Babys &bby3, Babys &bby4, Babys &bby5, Babys &bby6)
 {
 	for (int i = 0; i < 1; i++)
 	{
 		// only draw active particles
 		if (enemies[i].enabled1)
 		{
-			enemies[i].draw(myTran);
+			enemies[i].draw(myTran, bby, bby2, bby3, bby4, bby5, bby6);
 		}
 	}
 }
 
-void Spawner::update(Player &object, Transform &myTran, Emitter &pea)
+void Spawner::update(Player &object, Transform &myTran, Emitter &pea, Babys &bby, Babys &bby2, Babys &bby3, Babys &bby4, Babys &bby5, Babys &bby6)
 {
 	timer += sfw::getDeltaTime();
 	if (timer > spawnAcc)
@@ -57,7 +58,7 @@ void Spawner::update(Player &object, Transform &myTran, Emitter &pea)
 	{
 		if (enemies[i].enabled1 == true)
 		{
-			enemies[i].update(object, myTran, pea);
+			enemies[i].update(object, myTran, pea, bby, bby2, bby3, bby4, bby5, bby6);
 		}
 	}
 }

@@ -1,6 +1,9 @@
 #include "Baby.h"
 
-
+#include "sfwdraw.h"
+Babys::Babys()
+{
+}
 Babys::Babys(Transform &trans, float posX, float posY, float dimX, float dimY, float ang)
 {
 	lilT.pos = vec2{ posX,posY };
@@ -9,7 +12,7 @@ Babys::Babys(Transform &trans, float posX, float posY, float dimX, float dimY, f
 	lilT.e_parent = &trans;
 }
 
-void Babys::update(Player &ply, Emitter &pea, Spawner &eme, float rad)
+void Babys::update(Player &ply, Emitter &pea, vec2 &eme, float rad)
 {
 	if (dist(ply.myTrans.pos, lilT.getGlobalPosition()) < (ply.radius + rad) && enabled == true)
 	{
@@ -36,6 +39,8 @@ void Babys::draw(float rad)
 {
 	if (enabled == true)
 	{
+		vec2 t = lilT.getGlobalPosition();
+		sfw::drawCircle(t.x, t.y, 5, 12,MAGENTA);
 		DrawMatrix(lilT.getGlobalTransform(), rad);
 	}
 }

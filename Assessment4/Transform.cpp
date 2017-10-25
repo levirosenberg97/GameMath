@@ -5,7 +5,7 @@
 Transform::Transform()
 {
 	pos = vec2{ 0,0 };
-	dim = vec2{ 0,0 };
+	dim = vec2{ 1,1 };
 	angle = 0;
 	e_parent = nullptr;
 }
