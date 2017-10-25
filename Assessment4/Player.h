@@ -1,17 +1,22 @@
 #pragma once
 #include "vec2.h"
-
+#include "Transform.h"
 
 class Player
 {
 	
 public:
+	
 
-	vec2 pos{640,300};
+	Transform myTrans;
+	Transform mouseTran;
+	Transform lineTransform;
+
 	float speed = 3;
 	void draw();
 	void update();
 	void movement();
+	void cursor();
 	bool enabled = true;
 	float radius = 20;
 };

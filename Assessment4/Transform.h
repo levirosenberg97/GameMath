@@ -14,7 +14,20 @@ public:
 
 	mat3 getLocalTransform() const;
 	mat3 getGlobalTransform() const;
+
+	vec2 getGlobalPosition() const
+	{
+		return getGlobalTransform()[2].xy;
+	}
 };
 
 
 void DrawMatrix(const mat3 &t, float drawing_scale);
+
+
+/*
+
+[1 0 Tx]
+[0 1 Ty]
+[0 0 1 ]
+*/

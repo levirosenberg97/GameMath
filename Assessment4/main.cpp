@@ -6,20 +6,23 @@
 #include"Transform.h"
 #include "Particles.h"
 #include "Emitter.h"
+#include "Baby.h"
+#include "Spawner.h"
 
 using namespace sfw;
 
 int main()
 {
 	
-
-
 	Player ply;
-	Enemy eme;
+	Spawner eme;
 
 	Emitter pea;
-
 	
+
+
+	ply.myTrans.pos.x = 640;
+	ply.myTrans.pos.y = 300;
 
 	sfw::initContext(1280, 600,"SFW");
 
@@ -28,43 +31,40 @@ int main()
 	myTransform.dim = vec2{ 2,2 };
 	myTransform.angle = 0;
 
-	Transform myBaby;
-	myBaby.pos = vec2{ 10,10 };
-	myBaby.dim = vec2{ 1,1 };
-	myBaby.angle = 180;
-	myBaby.e_parent = &myTransform;
+	Babys bby(myTransform, 15, 15, 1, 1, 0);
+	Babys bby2(myTransform,	-15, -15, 1, 1, 180);
+	Babys bby3(myTransform, -25, 25, 1, 1, 300);
+	Babys bby4(myTransform, 25, -25, 1, 1, 140);
+	Babys bby5(myTransform, 25, 25, 1, 1, 300);
+	Babys bby6(myTransform, -25, -25, 1, 1, 140);
 
-	Transform myBaby2;
-	myBaby2.pos = vec2{ -10,-10 };
-	myBaby2.dim = vec2{ 1,1 };
-	myBaby2.angle = 90;
-	myBaby2.e_parent = &myTransform;
-
-	Transform myBaby3;
-	myBaby3.pos = vec2{ -20,-20 };
-	myBaby3.dim = vec2{ 1,1 };
-	myBaby3.angle = 90;
-	myBaby3.e_parent = &myTransform;
-
-	Transform myBaby4;
-	myBaby4.pos = vec2{ 20,20 };
-	myBaby4.dim = vec2{ 1,1 };
-	myBaby4.angle = 180;
-	myBaby4.e_parent = &myTransform;
 
 	sfw::setBackgroundColor(BLACK);
 
 	while (sfw::stepContext())
 	{
-		myTransform.angle += getDeltaTime() + 9;
+		myTransform.angle += getDeltaTime() + 10;
 		ply.draw();
 		ply.update();
-		eme.draw(myTransform,myBaby,myBaby2,myBaby3,myBaby4);
-		eme.update(ply, myTransform);
-		
-		
-			pea.draw(ply);
-			pea.update(ply);
+		eme.draw(myTransform);
+		eme.update(ply, myTransform, pea);
+		bby.draw(15);
+		bby2.draw(15);
+		bby3.draw(8);
+		bby4.draw(8);
+		bby5.draw(8);
+		bby6.draw(8);
+
+		bby.update(ply,pea,eme,15);
+		bby2.update(ply, pea, eme, 15);
+		bby3.update(ply, pea, eme, 8);
+		bby4.update(ply, pea, eme, 8);
+		bby5.update(ply, pea, eme, 8);
+		bby6.update(ply, pea, eme, 8);
+
+
+		pea.draw(ply);
+		pea.update(ply);
 
 
 	}

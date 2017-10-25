@@ -31,18 +31,6 @@ mat3 Transform::getGlobalTransform() const
 void DrawMatrix(const mat3 & t, float drawing_scale)
 {
 	vec2 position = t[2].xy;
-	vec2 right_ep = position + t[0].xy * drawing_scale;
-	vec2 up_ep = position + t[1].xy * drawing_scale;
-	vec2 left_ep = position - t[0].xy * drawing_scale;
-	vec2 down_ep = position - t[1].xy * drawing_scale;
-
-	sfw::drawLine(position.x, position.y, right_ep.x, right_ep.y, RED);
-	sfw::drawLine(position.x, position.y, up_ep.x, up_ep.y, GREEN);
-	sfw::drawLine(position.x, position.y, left_ep.x, left_ep.y, GREEN);
-	sfw::drawLine(position.x-1, position.y, down_ep.x, down_ep.y, RED);
-
-	
-
-	sfw::drawCircle(position.x, position.y, drawing_scale / 4);
+	sfw::drawCircle(position.x, position.y, drawing_scale);
 
 }

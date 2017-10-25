@@ -4,16 +4,14 @@
 
 void BaseParticles::draw(Player object)
 {
-	/*posX = object.pos.x + object.radius;
-	posY = object.pos.y + object.radius;*/
-	sfw::drawCircle(myTrans.pos.x, myTrans.pos.y, object.radius / 10);
+	r = object.radius / 10;
+	sfw::drawCircle(myTrans.pos.x, myTrans.pos.y, r);
 }
 
 void BaseParticles::update()
 {
 	myTrans.pos += (Dir * speed);
-	/*myTrans.pos.x += speedX;
-	myTrans.pos.y += speedY;*/
+
 }
 
 

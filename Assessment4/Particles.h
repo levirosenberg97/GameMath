@@ -9,10 +9,10 @@ public:
 	Transform myTrans;
 	bool enabled;
 
-	float speedX ;
-	float speedY ;
 	vec2 Dir;
 	float speed;
+
+	float r;
 
 	virtual void draw(Player object);
 	virtual void update();

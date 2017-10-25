@@ -1,5 +1,5 @@
 #pragma once
-#include "Particles.h"
+#include"Particles.h"
 #include "Player.h"
 
 class Emitter
@@ -12,7 +12,7 @@ public:
 	Emitter();
 
 	//collection of Particles
-	BaseParticles particles[100];
+	BaseParticles particles[1];
 
 	//current particle id
 	int particleId;

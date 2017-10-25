@@ -5,28 +5,75 @@
 #include"mat3.h"
 #include "Player.h"
 #include<iostream>
+#include "Emitter.h"
+#include "mat3.h"
 
 
-void Enemy::draw(Transform a, Transform b, Transform c, Transform d, Transform e)
+Enemy::Enemy()
+{
+
+}
+
+Enemy::Enemy(float siz1)
+{
+	size1 = siz1;
+}
+
+void Enemy::draw(Transform a)
+{
+	//float t = sfw::getTime();
+
+	//a.dim = vec2{ sinf(t) + 2, sinf(t) + 2 };
+
+	if (enabled1 == true)
+	{
+		DrawMatrix(a.getLocalTransform(), size1);
+	}
+}
+
+void Enemy::update(Player &dummy, Transform &a, Emitter &pea)
 {
 	float t = sfw::getTime();
 
-	
-	a.dim = vec2{ sinf(t) + 2, sinf(t) + 2 };
-	DrawMatrix(a.getLocalTransform(),size);
-	DrawMatrix(b.getGlobalTransform(), size/2);
-	DrawMatrix(c.getGlobalTransform(), size/2);
-	DrawMatrix(d.getGlobalTransform(), size/3);
-	DrawMatrix(e.getGlobalTransform(), size/3);
-}
-
-void Enemy::update(Player &dummy, Transform &a)
-{
-	if (dist(dummy.pos, a.pos) < (size + dummy.radius))
+	if (a.pos.x != dummy.myTrans.pos.x || a.pos.y != dummy.myTrans.pos.y)
 	{
-		std::cout <<"Collided"; 
+		if (a.pos.x < dummy.myTrans.pos.x)
+		{
+			//a.pos.x += speed;
+		}
+
+		if (a.pos.x > dummy.myTrans.pos.x)
+		{
+			//a.pos.x -= speed;
+		}
+
+		if (a.pos.y < dummy.myTrans.pos.y)
+		{
+		//	myTrans.pos.y += speed;
+		}
+
+		if (a.pos.y > dummy.myTrans.pos.y)
+		{
+		//	a.pos.y -= speed;
+		}
+	}
+
+
+	if (dist(dummy.myTrans.pos, a.pos) < (size1 + dummy.radius) && enabled1 == true)
+	{
 		dummy.enabled = false;
 	}
+
+	for (int i = 0; i < 1; i++)
+	{
+		if (dist(a.pos, pea.particles[i].myTrans.pos) < (size1 + pea.particles[i].r) && pea.particles[i].enabled == true && enabled1 == true)
+		{
+			pea.particles[i].enabled = false;
+			enabled1 = false;
+		}
+
+	}
+
 }
 
 // 2 ways

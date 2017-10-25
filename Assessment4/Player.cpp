@@ -8,15 +8,19 @@ using namespace sfw;
 
 void Player::draw()
 {
+	lineTransform.e_parent = &myTrans;
 	if (enabled == true)
 	{
-		drawCircle(pos.x, pos.y, radius);
+		drawCircle(myTrans.pos.x, myTrans.pos.y, radius);
+		drawLine(myTrans.pos.x, myTrans.pos.y, mouseTran.pos.x, mouseTran.pos.y, BLUE);
 	}
 }
 
 void Player::update()
 {
 	movement();
+	cursor();
+
 }
 
 //void Player::DrawTexture(unsigned sprite, const mat3 &t)
@@ -28,21 +32,31 @@ void Player::movement()
 {
 	if (getKey('W'))
 	{
-		pos.y += speed;
+		myTrans.pos.y += speed;
 	}
 
 	if (getKey('S'))
 	{
-		pos.y -= speed;
+		myTrans.pos.y -= speed;
 	}
 
 	if (getKey('D'))
 	{
-		pos.x += speed;
+		myTrans.pos.x += speed;
 	}
 
 	if (getKey('A'))
 	{
-		pos.x -= speed;
+		myTrans.pos.x -= speed;
 	}
+}
+
+void Player::cursor()
+{
+	mouseTran.pos.x = getMouseX();
+	mouseTran.pos.y = getMouseY();
+
+	drawLine(mouseTran.pos.x, mouseTran.pos.y, mouseTran.pos.x + 4, mouseTran.pos.y,RED);
+	drawLine(mouseTran.pos.x, mouseTran.pos.y, mouseTran.pos.x, mouseTran.pos.y - 6,RED);
+
 }
