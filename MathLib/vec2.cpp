@@ -137,7 +137,7 @@ vec2 max(const vec2 & a, const vec2 & b)
 	return temp;
 }
 
-float mag(vec2 & lhs)
+float mag(const vec2 & lhs)
 {
 	return sqrtf(sqr(lhs.x) + sqr(lhs.y));
 }

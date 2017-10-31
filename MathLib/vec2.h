@@ -36,7 +36,7 @@ vec2 &operator*=(vec2 & lhs, const float num);
 
 vec2 &operator/=(vec2 & lhs, const float num);
 
-float mag(vec2 & lhs);
+float mag(const vec2 & lhs);
 
 vec2 nrm( vec2  lhs);
 

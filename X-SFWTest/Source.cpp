@@ -3,12 +3,25 @@
 #include "Player.h"
 #include "Transform.h"
 #include <cmath>
+#include"Rigidbody.h"
+#include"DrawShape.h"
+
 
 int main()
 {
 	sfw::initContext(1280,600);
 
-	Transform myTransform;
+	Rigidbody rigidbody;
+	Transform transform;
+
+	circle circ = { {0,0},24 };
+
+	transform.pos = vec2{ 400,600 };
+	transform.dim = vec2{ 1,1 };
+
+	
+
+	/*Transform myTransform;
 	myTransform.pos = vec2{ 300,400 };
 	myTransform.dim = vec2{ 2,2 };
 	myTransform.angle = 0;
@@ -36,7 +49,7 @@ int main()
 	myBaby4.dim = vec2{ 1,1 };
 	myBaby4.angle = 180;
 	myBaby4.e_parent = &myTransform;
-
+*/
 	//Player me;
 	//me.pos = { 400,300 };
 	//me.speed = 5;
@@ -46,7 +59,7 @@ int main()
 
 	while (sfw::stepContext())
 	{
-		float t = sfw::getTime();
+	/*	float t = sfw::getTime();
 
 		myTransform.angle += sfw::getDeltaTime() + 90;
 		myTransform.dim = vec2{ sinf(t) + 2, sinf(t) + 2 };
@@ -55,8 +68,33 @@ int main()
 		DrawMatrix(myBaby.getGlobalTransform(), 30);
 		DrawMatrix(myBaby2.getGlobalTransform(), 30);
 		DrawMatrix(myBaby3.getGlobalTransform(), 20);
-		DrawMatrix(myBaby4.getGlobalTransform(), 20);
+		DrawMatrix(myBaby4.getGlobalTransform(), 20);*/
 
+		drawRect(transform.getGlobalTransform()*circ);
+		drawCircle(transform.getGlobalTransform() * circ);
+		DrawMatrix(transform.getGlobalTransform(),1);
+		
+		float dt = sfw::getDeltaTime();
+
+		rigidbody.force += { 0,-25 };
+		if (sfw::getKey('W')) rigidbody.force += transform.getGlobalTransform()[1].xy * 100;
+		if (sfw::getKey('D')) rigidbody.torque += -360;
+		if (sfw::getKey('A')) rigidbody.torque += 360;
+
+		if (sfw::getKey('Q'))rigidbody.impulse +=
+			-transform.getGlobalTransform()[1].xy * 10;
+
+
+		if (sfw::getKey(' '))
+		{
+			rigidbody.force += -rigidbody.velocity * 20;
+			rigidbody.torque += -rigidbody.angularVelocity * 20;
+		}
+
+
+
+		rigidbody.integrate(transform, dt);
+		DrawMatrix(transform.getGlobalTransform(), 48);
 
 	}
 
