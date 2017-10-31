@@ -5,4 +5,4 @@
 
 void drawCircle(const circle &C);
 
-void drawRect(const circle & C);
+void drawRect(const AABB & C, int color);

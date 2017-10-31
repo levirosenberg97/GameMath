@@ -19,6 +19,10 @@ struct AABB
 	//four points
 	//position width and height
 	//min max
+
+	vec2 min() const { return position - extents; }
+	vec2 max() const { return position + extents; }
+
 };
 
 

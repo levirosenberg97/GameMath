@@ -5,7 +5,8 @@
 #include <cmath>
 #include"Rigidbody.h"
 #include"DrawShape.h"
-
+#include "Collision.h"
+#include "Collider.h"
 
 int main()
 {
@@ -14,10 +15,14 @@ int main()
 	Rigidbody rigidbody;
 	Transform transform;
 
-	circle circ = { {0,0},24 };
-
+	circle circ = { {0,0},50 };
+	
+	
 	transform.pos = vec2{ 400,600 };
 	transform.dim = vec2{ 1,1 };
+	AABB AARP = { {0,0},{50,50} };
+	AABB box2 = { {640,10 }, {1280,16} };
+	circle circ2 = { {400,300}, 50 };
 
 	
 
@@ -70,19 +75,30 @@ int main()
 		DrawMatrix(myBaby3.getGlobalTransform(), 20);
 		DrawMatrix(myBaby4.getGlobalTransform(), 20);*/
 
-		drawRect(transform.getGlobalTransform()*circ);
+		Collision result = intersect_circle(transform.getGlobalTransform() * circ,circ2);
+
+		unsigned color = result.penDepth < 0 ? WHITE : RED;
+
+		
+		if (result.penDepth >= 0)
+		{
+			transform.pos += result.axis * result.handedness * result.penDepth;
+			//rigidbody.force += -rigidbody.velocity * 20;
+			//rigidbody.torque += -rigidbody.angularVelocity * 20;
+		}
+
+		
+
+		//drawRect(box2, color);
+		//drawRect(transform.getGlobalTransform() * AARP,GREEN);
 		drawCircle(transform.getGlobalTransform() * circ);
 		DrawMatrix(transform.getGlobalTransform(),1);
+		drawCircle(circ2);
 		
 		float dt = sfw::getDeltaTime();
 
 		rigidbody.force += { 0,-25 };
-		if (sfw::getKey('W')) rigidbody.force += transform.getGlobalTransform()[1].xy * 100;
-		if (sfw::getKey('D')) rigidbody.torque += -360;
-		if (sfw::getKey('A')) rigidbody.torque += 360;
 
-		if (sfw::getKey('Q'))rigidbody.impulse +=
-			-transform.getGlobalTransform()[1].xy * 10;
 
 
 		if (sfw::getKey(' '))
@@ -94,7 +110,7 @@ int main()
 
 
 		rigidbody.integrate(transform, dt);
-		DrawMatrix(transform.getGlobalTransform(), 48);
+		DrawMatrix(transform.getGlobalTransform(), 50);
 
 	}
 
