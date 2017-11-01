@@ -19,7 +19,25 @@ int main()
 	player.transform.pos = vec2{ 400,300 };
 	player.collider.box.extents = { .5,.5 };
 
-	AABB wall = { {1260,300},{100,640 } };
+	Wall wall[2];
+
+	wall[0].transform.pos = {640,50 };
+	wall[0].transform.dim = { 1280,240 };
+	wall[0].collider.box.extents = { .5,.5 };
+	wall[0].sprite = sfw::loadTextureMap("bricks.png");
+
+	wall[1].transform.pos = { 640,550 };
+	wall[1].transform.dim = { 1280,240 };
+	wall[1].collider.box.extents = { .5,.5 };
+	wall[1].sprite = sfw::loadTextureMap("bricks.png");
+
+	Ball ball;
+	ball.transform.pos = { 540,300 };
+	ball.sprite.handle;
+	ball.transform.dim = { 32,32 };
+	ball.collider.box.extents = { .5,.5 };
+	ball.rigidbody.velocity = { 0,-100 };
+	ball.rigidbody.drag = 0;
 
 
 	Rigidbody rigidbody;
@@ -87,24 +105,31 @@ int main()
 		player.rigidbody.integrate(player.transform, dt);
 		player.sprite.draw(player.transform);
 
-		drawRect(player.collider.getGlobalBox(player.transform), BLUE);
-
-		drawRect(wall, WHITE);
-
-		Collision result = intersect_AABB(player.transform.getGlobalTransform() * player.collider.box, wall);
-
-		//unsigned color = result.penDepth < 0 ? WHITE : RED;
-
-		
-		if (result.penDepth >= 0)
+		for (int i = 0; i < 2; i++)
 		{
-			player.transform.pos += result.axis * result.handedness * result.penDepth;
-			//player.rigidbody.force += -player.rigidbody.velocity * 20;
-			//rigidbody.torque += -rigidbody.angularVelocity * 20;
+			wall[i].sprite.draw(wall[i].transform);
+		}
+		ball.rigidbody.integrate(ball.transform, dt);
+
+
+		drawRect(player.collider.getGlobalBox(player.transform), BLUE);
+		drawRect(ball.collider.getGlobalBox(ball.transform), RED);
+		
+		for (int i = 0; i < 2; i++)
+		{
+			drawRect(wall[i].collider.getGlobalBox(wall[i].transform), WHITE);
 		}
 
-		
+		for (int i = 0; i < 2; i++)
+		{
+			doCollision(player, wall[i]);
+			doCollision(ball, wall[i]);
+			doCollision(player, wall[i]);
+		}
+		doCollision(player, ball);
 
+
+		//unsigned color = result.penDepth < 0 ? WHITE : RED;
 		////drawRect(box2, color);
 		////drawRect(transform.getGlobalTransform() * AARP,GREEN);
 		//drawCircle(transform.getGlobalTransform() * circ);
@@ -113,8 +138,6 @@ int main()
 		//
 		//
 		//player.rigidbody.force += { 0,-25 };
-
-
 		//player.rigidbody.integrate(transform, dt);
 		//DrawMatrix(transform.getGlobalTransform(), 50);
 

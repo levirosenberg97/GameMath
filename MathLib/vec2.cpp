@@ -155,3 +155,13 @@ vec2 nrmRef(vec2 & lhs)
 	lhs = nrm(lhs);
 	return lhs;
 }
+
+vec2 project(const vec2 & v, const vec2 & axis)
+{
+	return dot(v, axis)*axis;
+}
+
+vec2 reflect(const vec2 & v, const vec2 & axis)
+{
+	return 2 * project(v, axis) - v;
+}

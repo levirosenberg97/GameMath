@@ -48,3 +48,43 @@ Collision intersect_AABB_circle(const AABB & A, const circle & B)
 {
 	return Collision();
 }
+
+void static_resolution(vec2 & pos, vec2 & vel, const Collision & hit, float elasticity)
+{
+	// for position we need to correct:
+	pos += hit.axis * hit.handedness * hit.penDepth;
+
+	// for velocity we need to reflect:
+	vel = - reflect(vel, hit.axis*hit.handedness)*elasticity;
+
+}
+
+void dynamic_resolution(vec2 &Apos, vec2 &Avel, float Amass, vec2 &Bpos, vec2 &Bvel, float Bmass, const Collision &hit, float elasticity)
+{
+	// Law of Conservation
+	/*
+		mass*vel = momentum
+
+		AP + BP = `AP + `BP    // Conservation of Momentum
+		
+		Avel * Amass + Bvel * Bmass = fAvel * Amass + fBvel * Bmass
+
+		Avel - Bvel = -(fBvel - fAvel) // Relative Velocity
+	
+		fBvel = Bvel - Avel + fAvel
+
+		////
+
+	*/
+	vec2 Rvel = Avel - Bvel;
+	vec2 normal = hit.axis * hit.handedness;
+
+	float j = -(1 + elasticity)*dot(Rvel, normal) / dot(normal, normal*(1 / Amass + 1 / Bmass)); // impulse magnitude - balanced change in magnitude
+
+	Avel += (j / Amass) * normal;
+	Bvel -= (j / Bmass) * normal;
+
+	Apos += normal * hit.penDepth * Amass / (Amass + Bmass);
+	Bpos -= normal * hit.penDepth * Bmass / (Amass + Bmass);
+
+}
