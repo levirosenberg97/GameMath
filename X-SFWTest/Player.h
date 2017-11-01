@@ -2,18 +2,17 @@
 
 #include "sfwdraw.h"
 #include "vec2.h"
+#include "Sprite.h"
+#include "Controller.h"
+#include "Collider.h"
+
 
 class Player
 {		
 public:
-	vec2 pos;
-	
-	
-	float maxTime;
-	float time = maxTime;
-	float maxtele;
-	float teleTime = maxtele;
-	float speed;
-	void update();
-	void draw();
+	Transform transform;
+	Rigidbody rigidbody;
+	Collider collider;
+	Controller controller;
+	Sprite sprite;
 };

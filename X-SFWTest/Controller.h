@@ -11,7 +11,7 @@ public:
 	{
 		if (sfw::getKey('W'))
 		{
-			rb.force += t.getGlobalTransform()[1].xy * 100;
+			rb.force += t.getGlobalTransform()[1].xy * 10;
 		}
 		if (sfw::getKey('D'))
 		{
@@ -23,8 +23,13 @@ public:
 		}	
 		if (sfw::getKey('Q')) 
 		{
-			rb.impulse += -t.getGlobalTransform()[1].xy * 10;
+			rb.impulse += t.getGlobalTransform()[1].xy * 1;
 		}
-		
+		if (sfw::getKey(' '))
+		{
+			rb.force += -rb.velocity * 20;
+			rb.torque += -rb.angularVelocity * 20;
+		}
+
 	}
 };

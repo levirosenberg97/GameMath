@@ -12,17 +12,23 @@ int main()
 {
 	sfw::initContext(1280,600);
 
+	Player player;
+
+	player.sprite = sfw::loadTextureMap("redRocket.png");
+	player.transform.dim = vec2{ 48,48 };
+	player.transform.pos = vec2{ 400,300 };
+	player.collider.box.extents = { .5,.5 };
+
+	AABB wall = { {1260,300},{100,640 } };
+
+
 	Rigidbody rigidbody;
 	Transform transform;
 
 	circle circ = { {0,0},50 };
 	
 	
-	transform.pos = vec2{ 400,600 };
-	transform.dim = vec2{ 1,1 };
-	AABB AARP = { {0,0},{50,50} };
-	AABB box2 = { {640,10 }, {1280,16} };
-	circle circ2 = { {400,300}, 50 };
+
 
 	
 
@@ -75,42 +81,42 @@ int main()
 		DrawMatrix(myBaby3.getGlobalTransform(), 20);
 		DrawMatrix(myBaby4.getGlobalTransform(), 20);*/
 
-		Collision result = intersect_circle(transform.getGlobalTransform() * circ,circ2);
+		float dt = sfw::getDeltaTime();
 
-		unsigned color = result.penDepth < 0 ? WHITE : RED;
+		player.controller.poll(player.rigidbody, player.transform);
+		player.rigidbody.integrate(player.transform, dt);
+		player.sprite.draw(player.transform);
+
+		drawRect(player.collider.getGlobalBox(player.transform), BLUE);
+
+		drawRect(wall, WHITE);
+
+		Collision result = intersect_AABB(player.transform.getGlobalTransform() * player.collider.box, wall);
+
+		//unsigned color = result.penDepth < 0 ? WHITE : RED;
 
 		
 		if (result.penDepth >= 0)
 		{
-			transform.pos += result.axis * result.handedness * result.penDepth;
-			//rigidbody.force += -rigidbody.velocity * 20;
+			player.transform.pos += result.axis * result.handedness * result.penDepth;
+			//player.rigidbody.force += -player.rigidbody.velocity * 20;
 			//rigidbody.torque += -rigidbody.angularVelocity * 20;
 		}
 
 		
 
-		//drawRect(box2, color);
-		//drawRect(transform.getGlobalTransform() * AARP,GREEN);
-		drawCircle(transform.getGlobalTransform() * circ);
-		DrawMatrix(transform.getGlobalTransform(),1);
-		drawCircle(circ2);
-		
-		float dt = sfw::getDeltaTime();
-
-		rigidbody.force += { 0,-25 };
-
+		////drawRect(box2, color);
+		////drawRect(transform.getGlobalTransform() * AARP,GREEN);
+		//drawCircle(transform.getGlobalTransform() * circ);
+		//DrawMatrix(transform.getGlobalTransform(),1);
+		//drawCircle(circ2);
+		//
+		//
+		//player.rigidbody.force += { 0,-25 };
 
 
-		if (sfw::getKey(' '))
-		{
-			rigidbody.force += -rigidbody.velocity * 20;
-			rigidbody.torque += -rigidbody.angularVelocity * 20;
-		}
-
-
-
-		rigidbody.integrate(transform, dt);
-		DrawMatrix(transform.getGlobalTransform(), 50);
+		//player.rigidbody.integrate(transform, dt);
+		//DrawMatrix(transform.getGlobalTransform(), 50);
 
 	}
 
