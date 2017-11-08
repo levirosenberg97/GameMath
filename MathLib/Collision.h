@@ -23,6 +23,6 @@ Collision intersect_circle(const circle &A, const circle &B);
 
 Collision intersect_AABB_circle(const AABB &A, const circle &B);
 
-void static_resolution(vec2 &pos, vec2 &vel, const Collision &hit, float elasticity);
+void static_resolution(vec2 &pos, vec2 &vel, const Collision &hit, float elasticity, bool&);
 
 void dynamic_resolution(vec2 &Apos, vec2 &Avel, float Amass, vec2 &Bpos, vec2 &Bvel, float Bmass, const Collision &hit, float elasticity = 1.0f);

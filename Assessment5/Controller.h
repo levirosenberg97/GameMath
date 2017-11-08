@@ -22,12 +22,12 @@ public:
 		if (sfw::getKey('D'))
 		{
 			//rb.torque += -360;
-			rb.force.x += 800;
+			rb.force.x += 1400;
 		}
 		if (sfw::getKey('A'))
 		{
 			//rb.torque += 360;
-			rb.force.x -= 800;
+			rb.force.x -= 1400;
 		}
 		/*if (sfw::getKey('Q'))
 		{

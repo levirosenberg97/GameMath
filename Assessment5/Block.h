@@ -23,6 +23,7 @@ public:
 	Controller controller;
 	Sprite sprite;
 
+	bool alive;
 	bool grounded;
 
 	Player() 
@@ -38,8 +39,24 @@ public:
 	Collider collider;
 	Sprite sprite;
 	Transform transform;
+	Rigidbody rigidbody;
+	bool alive;
+	float xSpeed;
+	bool grounded;
+
+	void update(Player);
+
+	Enemy()
+	{
+		grounded = false;
+		xSpeed = -100;
+	}
+
 };
 
+bool doCollision(Enemy&, const Block&, bool&);
+bool doCollision(Player &player, const Block &block, bool&);
+bool doCollision(Enemy&, Player&);
 
-bool doCollision(Player &player, const Block &block);
+
 void drawBox(const AABB & C, int color);

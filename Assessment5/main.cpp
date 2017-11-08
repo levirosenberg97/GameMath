@@ -23,18 +23,27 @@ int main()
 	floor[1].transform.angle = 90;
 	floor[1].collider.box.extents = { .5,.5 };
 	
-	floor[2].transform.pos = vec2{ 640,1180 };
-	floor[2].transform.dim = { 1378,343 };
+	floor[2].transform.pos = vec2{ 340,350 };
+	floor[2].transform.dim = { 50,50 };
 	floor[2].collider.box.extents = { .5,.5 };
 
 
 
 
 	Player player;
-	player.transform.dim = { 12.125,27.125 };
-	player.transform.pos = { 640,60 };
+	player.transform.dim = { 64.6f,144.6f };
+	player.transform.pos = { 240,60 };
 	player.collider.box.extents = { .5,.5 };
 	player.sprite = loadTextureMap("Player.png");
+	player.alive = true;
+
+	Enemy enemy;
+	enemy.transform.dim = { 59,73 };
+	enemy.transform.pos = { 1100,60 };
+	enemy.collider.box.extents = { .5,.5 };
+	enemy.sprite = loadTextureMap("Enemy.png");
+	enemy.alive = true;
+
 	for (int i = 0; i < size; i++)
 	{
 		floor[i].sprite = loadTextureMap("Wall.png");
@@ -44,40 +53,46 @@ int main()
 	{
 		float dt = getDeltaTime();
 
-		player.grounded = false;
-		
-		for (int i = 0; i < size; i++)
+		if (player.alive == true)
 		{
-			bool collision = doCollision(player, floor[i]);
-			if (collision) player.grounded = true;
-		}
-		if (player.controller.requestJump && player.grounded)
-			player.rigidbody.velocity.y += 650;
+			player.grounded = false;
 
-		if (!player.grounded)
-		{
-			player.rigidbody.force.y -= 650;
-		}
-		player.controller.poll(player.rigidbody, player.transform);
-		player.rigidbody.integrate(player.transform, dt);
+			for (int i = 0; i < size; i++)
+			{
+				bool collision = doCollision(player, floor[i], player.grounded);
+			}
+			if (player.controller.requestJump && player.grounded)
+				player.rigidbody.impulse.y += 3350;
 
-		player.sprite.draw(player.transform);
+			if (!player.grounded)
+			{
+				player.rigidbody.force.y -= 3350;
+			}
+
+			player.controller.poll(player.rigidbody, player.transform);
+			player.rigidbody.integrate(player.transform, dt);
+
+			player.sprite.draw(player.transform);
+			if (getKey('A'))
+			{
+				player.transform.dim.x = -64.6f;
+			}
+			if (getKey('D'))
+			{
+				player.transform.dim.x = 64.6f;
+			}
+			drawBox(player.collider.getGlobalBox(player.transform), BLUE);
+		}
+
+
 
 		for (int i = 0; i < size; i++)
 		{
 			floor[i].sprite.draw(floor[i].transform);
 		}
 
-		if (getKey('A'))
-		{
-			player.transform.dim = { -12.125,27.125 };
-		}
-		if (getKey('D'))
-		{
-			player.transform.dim = { 12.125,27.125 };
-		}
+	
 
-		drawBox(player.collider.getGlobalBox(player.transform), BLUE);
 		for (int i = 0; i < size; i++)
 		{
 			drawBox(floor[i].collider.getGlobalBox(floor[i].transform), BLACK);
@@ -86,9 +101,24 @@ int main()
 
 		for (int i = 0; i < size; i++)
 		{
-			doCollision(player, floor[i]);
+			doCollision(player, floor[i], player.grounded);
+			doCollision(enemy, floor[i], enemy.grounded);
 		}
 		//doCollision(player, wall);
 	
+		if (enemy.alive == true)
+		{
+			for (int i = 0; i < size; i++)
+			{
+				doCollision(enemy, floor[i], enemy.grounded);
+			}
+
+			drawBox(enemy.collider.getGlobalBox(enemy.transform), RED);
+			enemy.sprite.draw(enemy.transform);
+			enemy.update(player);
+			enemy.rigidbody.integrate(enemy.transform, dt);
+			doCollision(enemy, player);
+		}
+
 	}
 }
