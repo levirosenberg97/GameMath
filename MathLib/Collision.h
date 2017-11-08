@@ -8,6 +8,11 @@ struct Collision
 	float penDepth;
 	float handedness;
 	vec2 axis;
+
+	Collision()
+	{
+		penDepth = -1;
+	}
 };
 
 Collision intersect_1D(float Amin, float Amax, float Bmin, float Bmax);

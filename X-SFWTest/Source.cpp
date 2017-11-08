@@ -124,7 +124,6 @@ int main()
 		{
 			doCollision(player, wall[i]);
 			doCollision(ball, wall[i]);
-			doCollision(player, wall[i]);
 		}
 		doCollision(player, ball);
 
