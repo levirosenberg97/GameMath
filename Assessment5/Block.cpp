@@ -39,9 +39,6 @@ bool doCollision(Enemy &enemy, const Block &block, bool&grounded)
 		if (hit.handedness >= 0)
 			grounded = true;
 
-		//double team
-		//player.rigidbody.velocity *= -1;
-
 		enemy.rigidbody.velocity.y = 0;
 	}
 

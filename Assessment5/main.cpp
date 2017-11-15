@@ -34,27 +34,27 @@ int main()
 	
 	//Block wall;
 
-	floor[3].transform.pos = vec2{ 740,165 };
-	floor[3].transform.dim = { 175,25 };
+	floor[3].transform.pos = vec2{ 740,125 };
+	floor[3].transform.dim = { 175,105 };
 	floor[3].collider.box.extents = { .5,.5 };
 
-	floor[4].transform.pos = vec2{ 520,260 };
+	floor[4].transform.pos = vec2{ 520,270 };
 	floor[4].transform.dim = { 175,25 };
 	floor[4].collider.box.extents = { .5,.5 };
 
-	floor[5].transform.pos = vec2{ 320,350 };
+	floor[5].transform.pos = vec2{ 320,370 };
 	floor[5].transform.dim = { 175,25 };
 	floor[5].collider.box.extents = { .5,.5 };
 
-	floor[6].transform.pos = vec2{ 480,480 };
+	floor[6].transform.pos = vec2{ 480,490 };
 	floor[6].transform.dim = { 175,25 };
 	floor[6].collider.box.extents = { .5,.5 };
 
-	floor[7].transform.pos = vec2{ 90,450 };
+	floor[7].transform.pos = vec2{ 90,460 };
 	floor[7].transform.dim = { 175,25 };
 	floor[7].collider.box.extents = { .5,.5 };
 
-	floor[8].transform.pos = vec2{ 920,250 };
+	floor[8].transform.pos = vec2{ 960,280 };
 	floor[8].transform.dim = { 175,25 };
 	floor[8].collider.box.extents = { .5,.5 };
 
