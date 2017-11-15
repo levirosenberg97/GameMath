@@ -7,8 +7,6 @@ class Rigidbody
 public:
 	float mass;
 
-
-
 	vec2 velocity,   // speed * direction
 		acceleration,
 		force,

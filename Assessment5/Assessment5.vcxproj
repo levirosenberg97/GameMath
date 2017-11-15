@@ -129,6 +129,7 @@
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="Colliding.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ScoreBoard.cpp" />
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +137,7 @@
     <ClInclude Include="Colliding.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Rigidbody.h" />
+    <ClInclude Include="ScoreBoard.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Transform.h" />
   </ItemGroup>

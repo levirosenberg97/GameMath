@@ -5,6 +5,7 @@
 #include "Controller.h"
 #include "Colliding.h"
 #include "Sprite.h"
+#include "ScoreBoard.h"
 
 class Block
 {
@@ -13,6 +14,14 @@ public:
 	Transform transform;
 	Sprite sprite;
 };
+
+class Background
+{
+public:
+	Sprite sprite;
+	Transform transform;
+};
+
 
 class Player
 {
@@ -40,9 +49,16 @@ public:
 	Sprite sprite;
 	Transform transform;
 	Rigidbody rigidbody;
+
+	float startX;
+	float startY;
+	float startSpeed;
+
 	bool alive;
 	float xSpeed;
 	bool grounded;
+	float respawnTimer = 10;
+	float currentTimer = 0;
 
 	void update(Player);
 
@@ -50,13 +66,14 @@ public:
 	{
 		grounded = false;
 		xSpeed = -100;
+		
 	}
 
 };
 
 bool doCollision(Enemy&, const Block&, bool&);
 bool doCollision(Player &player, const Block &block, bool&);
-bool doCollision(Enemy&, Player&);
+bool doCollision(Enemy&, Player&,Scoreboard&);
 
 
 void drawBox(const AABB & C, int color);

@@ -58,7 +58,8 @@ void static_resolution(vec2 & pos, vec2 & vel, const Collision & hit, float elas
 	if (hit.axis.y == 1 || hit.axis.y == -1)
 	{
 		vel.y = -reflect(vel, hit.axis*hit.handedness).y*elasticity;
-		if (hit.axis.y == 1) grounded = true;	
+		if (hit.axis.y == 1) grounded = true;
+
 	}
 	else if(hit.axis.x == 1 || hit.axis.x == -1)
 		vel.x = -reflect(vel, hit.axis*hit.handedness).x*elasticity;
